@@ -1,0 +1,16 @@
+.form{
+  margin-top: 10%;
+  width: 50%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: lightblue;
+  padding: 40px;
+  border-radius: 20px;
+}
+a{
+  color: #0B596F;
+  text-decoration: underline;
+  font-weight: bold;
+}
+

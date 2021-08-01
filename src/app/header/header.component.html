@@ -1,0 +1,18 @@
+<div class="navbar navbar-inverse clearfix" style="width: 95%; margin-left: auto; margin-right: auto;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['/home']">Vetreria Giavenale</a>
+    </div>
+    <div class="nav">
+      <ul class="nav navbar-nav navbar-left test">
+        <li routerLinkActive="active"><a [routerLink]="['/home']" >Home</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/products']">Prodotti</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/services']">Servizi</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" >
+        <li  routerLinkActive="active" *ngIf="!userLogged"><a [routerLink]="['/auth/login'] ">Register | Login</a></li>
+        <li  [routerLink]="['/auth']" routerLinkActive="active" *ngIf="userLogged"><a>Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
