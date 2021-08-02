@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {BehaviorSubject, pipe, throwError} from "rxjs";
-import {catchError, map, take, tap} from "rxjs/operators";
+import {BehaviorSubject, throwError} from "rxjs";
+import {catchError, take, tap} from "rxjs/operators";
 import {User} from "../shared/user.model";
 
 

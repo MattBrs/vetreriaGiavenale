@@ -5,6 +5,8 @@ import {CommonModule} from "@angular/common";
 import { ProductListComponent } from './product-list/product-list.component';
 import { ItemComponent } from './product-list/item/item.component';
 import { SelectCategoryPipe } from './select-category.pipe';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { HighlightDirective } from './product-list/item/highlight.directive';
 
 
 
@@ -14,11 +16,13 @@ import { SelectCategoryPipe } from './select-category.pipe';
     ProductsComponent,
     ProductListComponent,
     ItemComponent,
-    SelectCategoryPipe
+    SelectCategoryPipe,
+    HighlightDirective
   ],
     imports: [
-        ProductsRoutingModule,
-        CommonModule,
+      ProductsRoutingModule,
+      CommonModule,
+      BrowserAnimationsModule
     ]
 })
 export class ProductsModule {

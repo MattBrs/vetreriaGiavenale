@@ -1,7 +1,6 @@
 import {NgModule} from "@angular/core";
 import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./home/home.component";
-import {ProductsComponent} from "./prodotti/products.component";
 import {ServicesComponent} from "./servizi/services.component";
 import {AuthGuard} from "./auth/auth.guard";
 

@@ -11,6 +11,8 @@ import {AuthModule} from "./auth/auth.module";
 import {ProductsModule} from "./prodotti/products.module";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./auth/auth.interceptor";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -23,7 +25,13 @@ import {AuthInterceptor} from "./auth/auth.interceptor";
         BrowserModule,
         AppRoutingModule,
         AuthModule,
-        ProductsModule
+        ProductsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: environment.production,
+          // Register the ServiceWorker as soon as the app is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        })
     ],
     providers: [
         {
