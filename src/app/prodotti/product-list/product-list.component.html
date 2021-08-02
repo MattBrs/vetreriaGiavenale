@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1">
+    <br>
+    <app-item
+      *ngFor="let item of products | selectCategory:productCategory"
+      [product]="item"
+    ></app-item>
+  </div>
+</div>

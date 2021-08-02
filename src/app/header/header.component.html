@@ -11,7 +11,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right" >
         <li  routerLinkActive="active" *ngIf="!userLogged"><a [routerLink]="['/auth/login'] ">Register | Login</a></li>
-        <li  [routerLink]="['/auth']" routerLinkActive="active" *ngIf="userLogged"><a>Logout</a></li>
+        <li  [routerLink]="['/auth']" routerLinkActive="active" *ngIf="userLogged" (click)="onLogout()"><a>Logout</a></li>
       </ul>
     </div>
   </div>

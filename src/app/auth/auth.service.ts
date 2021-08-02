@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {BehaviorSubject, pipe, throwError} from "rxjs";
-import {catchError, tap} from "rxjs/operators";
+import {catchError, map, take, tap} from "rxjs/operators";
 import {User} from "../shared/user.model";
 
 
@@ -60,7 +60,6 @@ export class AuthService {
   }
 
   private static handleError (errorResponse: HttpErrorResponse){
-
     let errorMessage = 'An unknown error occurred';
     let error = errorResponse.error.error.message;
     if(error == 'EMAIL_EXISTS'){
@@ -83,5 +82,41 @@ export class AuthService {
     this.loggedUser.next(user);
   }
 
+  logout() {
+    this.loggedUser.next(new User('','','', new Date()));
+    localStorage.clear();
+  }
+
+  autoLogin(){
+    let localDataItem = localStorage.getItem('userData');
+    let data: {
+      email: string,
+      id: string,
+      _token: string,
+     _expirationDate: Date
+    } = JSON.parse(<string>localDataItem);
+
+    const loadedUser = new User(data.email, data.id, data._token, data._expirationDate);
+
+    if(loadedUser.token != ''){
+      this.loggedUser.next(loadedUser);
+    }else{
+      // do nothing
+    }
+  }
+
+  autoLogout() {
+    this.loggedUser.pipe(
+      take(1)
+    ).subscribe(
+      data => {
+        if(data.token == null){
+          this.logout();
+        }else {
+          // do nothing
+        }
+      }
+    )
+  }
 
 }

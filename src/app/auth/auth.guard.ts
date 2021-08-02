@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
       take(1),
       map(
         user => {
-          if(user.token == ''){
+          if(user.token == '' && user.token != null){
             return this.router.createUrlTree(['/auth/login']);
           }else{
             return true;
@@ -27,8 +27,5 @@ export class AuthGuard implements CanActivate {
       )
     );
 
-
-
   }
-
 }
