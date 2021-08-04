@@ -2,11 +2,10 @@ export class User {
   constructor(
     public email: string,
     public id: string,
-    public _token: string,
+    private _token: string,
     private _expirationDate: Date
   ) {
   }
-
   get expirationDate() {
     return this._expirationDate;
   }

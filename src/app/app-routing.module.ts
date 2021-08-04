@@ -21,8 +21,7 @@ const routes : Routes = [
   },
   {
     path: 'services',
-    component: ServicesComponent,
-    canActivate: [AuthGuard]
+    loadChildren: () => import('./servizi/services-routing.module').then(m => m.ServicesRoutingModule),
   },
   {
     path: 'auth',

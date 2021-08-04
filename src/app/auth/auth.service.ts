@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {BehaviorSubject, throwError} from "rxjs";
 import {catchError, take, tap} from "rxjs/operators";
 import {User} from "../shared/user.model";
+import {Router} from "@angular/router";
 
 
 interface ResponsePayload {
@@ -20,7 +21,7 @@ interface ResponsePayload {
 export class AuthService {
   loggedUser = new BehaviorSubject<User>(new User('', '', '', new Date()));
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   loginUser(email: string, password: string) {
@@ -79,12 +80,15 @@ export class AuthService {
     let expirationDate = new Date(new Date().getTime() + expiresIn*1000)
     let user: User = new User(email,id,token,expirationDate);
     localStorage.setItem('userData', JSON.stringify(user));
+    this.autoLogout(expiresIn*1000);
     this.loggedUser.next(user);
   }
 
   logout() {
     this.loggedUser.next(new User('','','', new Date()));
     localStorage.clear();
+    this.router.navigate(['/home']);
+    alert('token scaduto, rifare il login');
   }
 
   autoLogin(){
@@ -96,27 +100,24 @@ export class AuthService {
      _expirationDate: Date
     } = JSON.parse(<string>localDataItem);
 
-    const loadedUser = new User(data.email, data.id, data._token, data._expirationDate);
-
-    if(loadedUser.token != ''){
-      this.loggedUser.next(loadedUser);
-    }else{
-      // do nothing
+    if(data._expirationDate >= new Date()){
+      this.logout();
+    }else {
+      const loadedUser = new User(data.email, data.id, data._token, data._expirationDate);
+      if(loadedUser.token != ''){
+        this.loggedUser.next(loadedUser);
+        this.autoLogout(new Date(loadedUser.expirationDate).getTime() - new Date().getTime());
+      }else{
+        // do nothing
+      }
     }
   }
 
-  autoLogout() {
-    this.loggedUser.pipe(
-      take(1)
-    ).subscribe(
-      data => {
-        if(data.token == null){
-          this.logout();
-        }else {
-          // do nothing
-        }
-      }
-    )
+  autoLogout(time: number) {
+    console.log("token is valid for: " + time/1000 + " seconds");
+    setTimeout(() => {
+      this.logout();
+    } ,time)
   }
 
 }

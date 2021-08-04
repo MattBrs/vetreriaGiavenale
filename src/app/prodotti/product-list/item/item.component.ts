@@ -18,13 +18,14 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
           backgroundColor: '#074455',
           marginBottom: '10px',
           color: '#add8e6',
-          borderRadius: '20px'
+          borderRadius: '20px',
+          width: '90%'
         })),
         transition('normal => hover', [
           animate(200)
         ]),
         transition('hover => normal', [
-          animate(400)
+          animate(200)
         ])
       ])
     ]
