@@ -5,16 +5,18 @@
 
         <div class="form-group">
           <label for="Email">Email</label>
-          <input class="form-control" type="text" name="Email" id="Email" formControlName="email">
+          <input class="form-control" type="text" name="Email" id="Email" formControlName="email" >
+          <p class="help-block" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.touched">Email non valida, controlla</p>
         </div>
 
         <div class="form-group">
           <label for="Password">Password</label>
           <input class="form-control" type="password" name="Password" id="Password" formControlName="password">
+          <p class="help-block" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.touched">Inserisci una password</p>
         </div>
 
         <div class="form-group" style="text-align: center">
-          <button class="btn btn-default" (click)="onLogin()">Login</button>
+          <button class="btn btn-default" (click)="onLogin()" [disabled]="!loginForm.valid">Login</button>
           or
           <a [routerLink]="['/auth/register']">Click here to register</a>
         </div>

@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {BehaviorSubject, throwError} from "rxjs";
-import {catchError, take, tap} from "rxjs/operators";
+import {catchError, tap} from "rxjs/operators";
 import {User} from "../shared/user.model";
 import {Router} from "@angular/router";
 
@@ -88,7 +88,6 @@ export class AuthService {
     this.loggedUser.next(new User('','','', new Date()));
     localStorage.clear();
     this.router.navigate(['/home']);
-    alert('token scaduto, rifare il login');
   }
 
   autoLogin(){
@@ -117,6 +116,7 @@ export class AuthService {
     console.log("token is valid for: " + time/1000 + " seconds");
     setTimeout(() => {
       this.logout();
+      alert('token scaduto, rifare il login');
     } ,time)
   }
 
