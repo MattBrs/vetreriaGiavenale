@@ -18,6 +18,7 @@ export class ProductListComponent implements OnInit {
   constructor(private route: ActivatedRoute, private productsService: ProductsService) { }
 
   ngOnInit(): void {
+    this.products = this.productsService.products;
     this.paramsSub = this.route.paramMap.subscribe(
       params => {
         this.productCategory = <string>params.get('category');
@@ -29,5 +30,4 @@ export class ProductListComponent implements OnInit {
       }
     );
   }
-
 }
