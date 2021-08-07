@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {HttpErrorResponse} from "@angular/common/http";
-import {throwError} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -18,7 +17,7 @@ export class RegisterComponent implements OnInit {
     'password': new FormControl(null, [Validators.required]),
     'city': new FormControl('schio', [Validators.required]),
   });
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   onRegister() {
     let username = this.registrationForm.controls.username.value;
@@ -28,7 +27,7 @@ export class RegisterComponent implements OnInit {
 
     this.authService.registerUser(userEmail, password, username).subscribe(
       responsePayload => {
-        //Se va a buon fine
+        this.router.navigate(['/home']);
       }, error => {
         alert(error);
       }

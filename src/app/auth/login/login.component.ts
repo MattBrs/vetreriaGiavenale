@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     let email = this.loginForm.controls.email.value;
     let password = this.loginForm.controls.password.value;
     this.authService.loginUser(email, password).subscribe(
-      responsePayload => {
+      () => {
         this.router.navigate(['/home']);
       }, error => {
         alert(error);

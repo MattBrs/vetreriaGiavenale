@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ServicesFetchService} from "./servicesFetch.service";
 import {Service} from "./service.model";
 import {Subscription} from "rxjs";
-import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-services',
