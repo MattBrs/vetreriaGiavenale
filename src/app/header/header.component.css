@@ -1,21 +1,19 @@
-.navbar{
-  background-color: #0B596F;
-}
-
-li.active{
-  background-color: white;
-}
-
-.navbar-inverse .navbar-nav > .active > a,
-.navbar-inverse .navbar-nav > .active > a:hover,
-.navbar-inverse .navbar-nav > .active > a:focus {
-  background-color: #074455;
-}
 
 .navbar-brand{
   color: white;
 }
 
-.nav a{
+.navbar-brand:hover{
   color: white;
 }
+
+.navbar-nav a{
+  color: white;
+}
+
+.navbar-nav a.active{
+  color: #303030;
+}
+
+
+

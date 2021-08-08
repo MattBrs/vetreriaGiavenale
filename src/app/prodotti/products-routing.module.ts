@@ -16,7 +16,7 @@ const routes: Routes = [
       }
     ],
     canActivate: [AuthGuard],
-    resolve: [ProductResolver]
+    resolve: {products: ProductResolver}
   }
 ]
 

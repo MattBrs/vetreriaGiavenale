@@ -9,16 +9,10 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
   animations: [
       trigger('hoverAnimation', [
         state('normal', style({
-          backgroundColor: '#add8e6',
-          marginBottom: '10px',
-          color: '#074455',
-          borderRadius: '20px'
+          backgroundColor: '#e91e63',
         })),
         state('hover', style({
-          backgroundColor: '#074455',
-          marginBottom: '10px',
-          color: '#add8e6',
-          borderRadius: '20px',
+          backgroundColor: '#9c27b0',
           width: '90%'
         })),
         transition('normal => hover', [

@@ -13,6 +13,13 @@ import {AuthInterceptor} from "./auth/auth.interceptor";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {ServicesModule} from "./servizi/services.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
     declarations: [
@@ -31,7 +38,14 @@ import {ServicesModule} from "./servizi/services.module";
           // Register the ServiceWorker as soon as the app is stable
           // or after 30 seconds (whichever comes first).
           registrationStrategy: 'registerWhenStable:30000'
-        })
+        }),
+        BrowserAnimationsModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule
     ],
     providers: [
         {

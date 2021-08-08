@@ -15,8 +15,7 @@ export class ProductResolver implements Resolve<Product[]> {
   constructor(private productsService: ProductsService) {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product[]> | Product[] {
-    if(this.productsService.products.length<=0){
-      console.log('fetching data')
+    if(this.productsService.products != null){
       return this.productsService.fetchProducts();
     }
     return this.productsService.products;

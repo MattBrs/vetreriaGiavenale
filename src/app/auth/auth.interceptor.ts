@@ -21,7 +21,6 @@ export class AuthInterceptor implements HttpInterceptor {
         if(user == null || user.token == ''){
           return next.handle(request);
         }
-        console.log(user.expirationDate);
         let modifiedRequest = request.clone({params: new HttpParams().set('auth', user.token)});
         return next.handle(modifiedRequest);
       })

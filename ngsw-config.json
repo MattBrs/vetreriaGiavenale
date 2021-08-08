@@ -26,5 +26,17 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "products",
+      "urls": ["https://vetreriagiavenale-default-rtdb.europe-west1.firebasedatabase.app/products.json"],
+      "cacheConfig": {
+        "maxAge": "1h",
+        "maxSize": 5,
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    }
   ]
 }

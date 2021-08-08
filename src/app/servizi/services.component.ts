@@ -20,12 +20,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
     }[] = JSON.parse(<string>localStorage.getItem('services'));
     if(service != null){
       this.services = service;
-      console.log('services exist');
-    }else{
-      console.log('services null');
     }
-
-
     this.serviceSub = this.fetchService.fetchData().subscribe( response => {
       this.services = response;
       localStorage.setItem('services', JSON.stringify(this.services));

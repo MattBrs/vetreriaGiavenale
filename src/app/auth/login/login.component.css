@@ -4,13 +4,22 @@
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
-  background-color: lightblue;
+  background-color: #e91e63;
   padding: 40px;
   border-radius: 20px;
+  color: white;
 }
 a{
-  color: #0B596F;
+  color: rgb(48,48,48);
   text-decoration: underline;
+  font-weight:normal ;
+}
+a:hover{
   font-weight: bold;
 }
+
+.btn-danger{
+  background-color: rgb(48,48,48)
+}
+
 

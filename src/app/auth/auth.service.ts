@@ -6,7 +6,6 @@ import {catchError, tap} from "rxjs/operators";
 import {User} from "../shared/user.model";
 import {Router} from "@angular/router";
 
-
 interface ResponsePayload {
   idToken: string,
   email: string,
@@ -20,6 +19,7 @@ interface ResponsePayload {
 })
 export class AuthService {
   loggedUser = new BehaviorSubject<User>(new User('', '', '', new Date()));
+  expiresIn = 3600;
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -36,6 +36,7 @@ export class AuthService {
     ).pipe(
       catchError(AuthService.handleError),
       tap(data => {
+        this.expiresIn = +data.expiresIn;
         this.handleAuth(data.email, data.localId, data.idToken, +data.expiresIn);
       })
     );
@@ -77,10 +78,10 @@ export class AuthService {
   }
 
   private handleAuth(email: string, id: string, token: string, expiresIn: number){
-    let expirationDate = new Date(new Date().getTime() + expiresIn*1000)
-    let user: User = new User(email,id,token,expirationDate);
+    let expirationDate = new Date(new Date().getTime() + expiresIn*1000);
+    let user: User = new User(email, id, token, expirationDate);
     localStorage.setItem('userData', JSON.stringify(user));
-    this.autoLogout(expiresIn*1000);
+    this.autoLogout(user ,expiresIn*1000);
     this.loggedUser.next(user);
   }
 
@@ -101,23 +102,31 @@ export class AuthService {
 
     if(data._expirationDate >= new Date()){
       this.logout();
+      alert('Token expired, please login again');
     }else {
       const loadedUser = new User(data.email, data.id, data._token, data._expirationDate);
       if(loadedUser.token != ''){
+        console.log('autoLogin: ' + loadedUser.expirationDate);
         this.loggedUser.next(loadedUser);
-        this.autoLogout(new Date(loadedUser.expirationDate).getTime() - new Date().getTime());
-      }else{
-        // do nothing
+        this.autoLogout(loadedUser , new Date(loadedUser.expirationDate).getTime() - new Date().getTime());
       }
     }
   }
 
-  autoLogout(time: number) {
-    console.log("token is valid for: " + time/1000 + " seconds");
+  autoLogout(user: User, time: number) {
+    console.log(user.expirationDate);
     setTimeout(() => {
-      this.logout();
-      alert('token scaduto, rifare il login');
-    } ,time)
-  }
 
+      // firebase.auth().currentUser?.getIdToken(true);
+      // const refreshedUser = new User(user.email, user.id, user.token, new Date(new Date().getTime() + 3600000));
+      // this.loggedUser.next(refreshedUser);
+      // console.log('token has been refreshed, new expiration time and date: ');
+      // console.log(refreshedUser.expirationDate)
+
+      this.handleAuth(user.email, user.id, user.token, this.expiresIn)
+      console.log('token expired, retrying login');
+      //this.logout();
+      //alert('Token expired, please login again');
+    } ,time-60*1000);
+  }
 }

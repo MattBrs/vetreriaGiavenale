@@ -16,7 +16,8 @@
         </div>
 
         <div class="form-group" style="text-align: center">
-          <button class="btn btn-default" (click)="onLogin()" [disabled]="!loginForm.valid">Login</button>
+          <br>
+          <button class="btn btn-danger" (click)="onLogin()" [disabled]="!loginForm.valid">Login</button>
           or
           <a [routerLink]="['/auth/register']">Click here to register</a>
         </div>
