@@ -91,7 +91,7 @@ export class AuthService {
     this.router.navigate(['/home']);
   }
 
-  autoLogin(){
+  autoLogin(): null | User{
     let localDataItem = localStorage.getItem('userData');
     let data: {
       email: string,
@@ -109,24 +109,17 @@ export class AuthService {
         console.log('autoLogin: ' + loadedUser.expirationDate);
         this.loggedUser.next(loadedUser);
         this.autoLogout(loadedUser , new Date(loadedUser.expirationDate).getTime() - new Date().getTime());
+        return loadedUser;
       }
     }
+    return null;
   }
 
   autoLogout(user: User, time: number) {
     console.log(user.expirationDate);
     setTimeout(() => {
-
-      // firebase.auth().currentUser?.getIdToken(true);
-      // const refreshedUser = new User(user.email, user.id, user.token, new Date(new Date().getTime() + 3600000));
-      // this.loggedUser.next(refreshedUser);
-      // console.log('token has been refreshed, new expiration time and date: ');
-      // console.log(refreshedUser.expirationDate)
-
-      this.handleAuth(user.email, user.id, user.token, this.expiresIn)
+      this.handleAuth(user.email, user.id, user.token, this.expiresIn);
       console.log('token expired, retrying login');
-      //this.logout();
-      //alert('Token expired, please login again');
     } ,time-60*1000);
   }
 }

@@ -5,7 +5,6 @@ import {CommonModule} from "@angular/common";
 import { ProductListComponent } from './product-list/product-list.component';
 import { ItemComponent } from './product-list/item/item.component';
 import { SelectCategoryPipe } from './select-category.pipe';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { HighlightDirective } from './product-list/item/highlight.directive';
 
 
@@ -22,7 +21,6 @@ import { HighlightDirective } from './product-list/item/highlight.directive';
     imports: [
       ProductsRoutingModule,
       CommonModule,
-      BrowserAnimationsModule
     ]
 })
 export class ProductsModule {

@@ -14,15 +14,15 @@ const routes : Routes = [
   },
   {
     path: 'products',
-    loadChildren: () => import('./prodotti/products-routing.module').then(m => m.ProductsRoutingModule)
+    loadChildren: () => import('./prodotti/products.module').then(m => m.ProductsModule)
   },
   {
     path: 'services',
-    loadChildren: () => import('./servizi/services-routing.module').then(m => m.ServicesRoutingModule),
+    loadChildren: () => import('./servizi/services.module').then(m => m.ServicesModule),
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth-routing.module').then(m => m.AuthRoutingModule)
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   }
 ]
 

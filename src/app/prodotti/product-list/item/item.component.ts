@@ -12,7 +12,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
           backgroundColor: '#e91e63',
         })),
         state('hover', style({
-          backgroundColor: '#9c27b0',
+          backgroundColor: '#c20343',
           width: '90%'
         })),
         transition('normal => hover', [
